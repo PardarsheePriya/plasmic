@@ -19,8 +19,9 @@ COPY . .
 # Make sure your script is executable
 RUN chmod +x /app/script.sh
 
-# Run the script to clone or update the repository
-RUN ./script.sh --repourl https://github.com/PardarsheePriya/plasmic --reponame plasmic --branch main
+# Use environment variables to dynamically provide repo URL, name, and branch
+# Pass the environment variables to the script
+RUN /app/script.sh --repourl "${REPO_URL}" --reponame "${REPO_NAME}" --branch "${BRANCH}"
 
 # Build the application
 RUN npm run build
