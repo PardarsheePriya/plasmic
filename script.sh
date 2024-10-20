@@ -5,6 +5,14 @@ usage() {
     exit 1
 }
 
+# Log the input arguments
+echo "REPO_URL: $1"
+echo "REPO_NAME: $2"
+echo "BRANCH: $3"
+
+# The rest of your script...
+
+
 # Function to check if required arguments are provided
 check_required_arguments() {
     if [[ -z "$REPO_URL" || -z "$REPO_NAME" || -z "$BRANCH" ]]; then
