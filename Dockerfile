@@ -7,11 +7,8 @@ WORKDIR /app
 # Copy package.json files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
-
-# Install Plasmic CLI globally
-RUN npm install -g @plasmicapp/cli
+# Install dependencies and Plasmic CLI globally
+RUN npm install && npm install -g @plasmicapp/cli
 
 # Copy the rest of your application code and your script
 COPY . .
@@ -19,7 +16,11 @@ COPY . .
 # Make sure your script is executable
 RUN chmod +x /app/script.sh
 
-# Use environment variables to dynamically provide repo URL, name, and branch
+# Define environment variables (if known at build time)
+ARG REPO_URL
+ARG REPO_NAME
+ARG BRANCH
+
 # Pass the environment variables to the script
 RUN /app/script.sh --repourl "${REPO_URL}" --reponame "${REPO_NAME}" --branch "${BRANCH}"
 
